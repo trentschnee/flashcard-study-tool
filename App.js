@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator  } from '@react-navigation/bottom-tabs';
 import Home from './components/Home'
-import AddDeck from './components/AddDeck'
+import NewDeck from './components/NewDeck'
 const Tabs = createBottomTabNavigator();
 
 export default function App() {
@@ -13,7 +13,7 @@ export default function App() {
       <NavigationContainer>
 <Tabs.Navigator initialRouteName="Home">
 <Tabs.Screen name="Home" component={Home} />
-<Tabs.Screen name="Add Deck" component={AddDeck} />
+<Tabs.Screen name="Add Deck" component={NewDeck} />
 </Tabs.Navigator>
       </NavigationContainer>
 

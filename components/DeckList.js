@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, View } from 'react-native';
-class AddDeck extends Component {
+class DeckList extends Component {
     render() {
-      return <View><Text>Test</Text></View>;
+      return <View><Text>DeckList</Text></View>;
     }
   }
 
-export default AddDeck;
+export default DeckList;
