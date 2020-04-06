@@ -1,11 +1,18 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, View,TouchableOpacity,TextInput } from 'react-native';
 class NewDeck extends Component {
+   
     state = {
         deckInput: ''
     }
+   
     onChangeText = (value) =>{
+      
        this.setState({value})
+    }
+    submitButton = ()=>{
+        const { navigation } = this.props;
+        navigation.navigate("Deck");
     }
     render() {
         const {deckTitleInput} = this.state;
