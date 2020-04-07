@@ -5,9 +5,13 @@ import { createBottomTabNavigator  } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 // import Home from './components/Home'
 import Quiz from './components/Quiz'
-import Deck from './components/Deck'
-import DeckList from './components/DeckList'
-import NewDeck from './components/NewDeck'
+import {createStore} from 'redux';
+import {Provider} from 'react-redux';
+import Deck from './components/Deck';
+import DeckList from './components/DeckList';
+import NewDeck from './components/NewDeck';
+import reducer from "./reducers";
+
 function HomeScreen({navigation,route}){
   const Tabs = createBottomTabNavigator();
   return(
@@ -30,12 +34,12 @@ function AllStacks ({navigation}) {
 export default function App() {
   return (
   
-  
+  <Provider store={createStore(reducer)}>
       <NavigationContainer>
 
 <AllStacks/>
       </NavigationContainer>
-
+      </Provider>
   );
 }
 

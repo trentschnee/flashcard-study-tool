@@ -12,3 +12,4 @@ switch(action.type){
         }
 }
 }
+export default decks;
