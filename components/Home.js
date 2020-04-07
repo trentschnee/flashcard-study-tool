@@ -5,7 +5,8 @@ import AddCard from './AddCard'
 import Quiz from './Quiz'
 import Deck from './Deck'
 import DeckList from './DeckList'
-const Stacks = createStackNavigator();
+import NewDeck from './NewDeck'
+
 class Home extends Component {
 
     render() {
@@ -14,6 +15,7 @@ class Home extends Component {
       return (
         <Stacks.Navigator initialRouteName="Home">
         <Stacks.Screen name="Home" component={DeckList} options={{ headerShown: false }}  />
+        <Stacks.Screen name="Add Deck" component={NewDeck} options={{ headerShown: true }}  />
         <Stacks.Screen name="Deck" component={Deck}  options={({ route }) => ({ title: route.params.title })}/>
         <Stacks.Screen name="Quiz" component={Quiz} options={{ headerShown: false }} />
         </Stacks.Navigator>
