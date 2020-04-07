@@ -7,8 +7,15 @@ class Deck extends Component {
   state = {
     modalVisible: false
   }
+
   handleAddCard = () =>{
     this.setState({modalVisible:true})
+  }
+  handleStartQuiz = () =>{
+    console.log('start quiz')
+  }
+  handleDeleteDeck = () =>{
+    console.log('delete deck')
   }
   handleCloseModal = () =>{
     this.setState({modalVisible:false})
@@ -32,7 +39,17 @@ class Deck extends Component {
         <TouchableOpacity
                 style={styles.button}
                 onPress={this.handleAddCard}
-              >
+              ><Text>Add Card</Text>
+              </TouchableOpacity>
+        <TouchableOpacity
+                style={styles.button}
+                onPress={this.handleStartQuiz}
+              ><Text>Start Quiz</Text>
+              </TouchableOpacity>
+        <TouchableOpacity
+                style={styles.button}
+                onPress={this.handleDeleteDeck}
+              ><Text>Delete Deck</Text>
               </TouchableOpacity>
       </View>;
     }

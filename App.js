@@ -11,9 +11,9 @@ export default function App() {
   
   
       <NavigationContainer>
-<Tabs.Navigator initialRouteName="Home" screenOptions={()=>{console.log('init')}}>
+<Tabs.Navigator initialRouteName="Home">
 <Tabs.Screen name="Home" component={Home} />
-<Tabs.Screen name="Add Deck" component={NewDeck} />
+<Tabs.Screen name="Add Deck" component={NewDeck} options={{tabBarVisible :false}}  />
 </Tabs.Navigator>
       </NavigationContainer>
 

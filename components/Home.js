@@ -9,10 +9,12 @@ const Stacks = createStackNavigator();
 class Home extends Component {
 
     render() {
+        const {navigation,route} = this.props;
+        navigation.setOptions({ tabBarVisible: route.state ? route.state.index > 0 ? false : true : null });
       return (
         <Stacks.Navigator initialRouteName="Home">
         <Stacks.Screen name="Home" component={DeckList} options={{ headerShown: false }}  />
-        <Stacks.Screen name="Deck" component={Deck} options={{ headerShown: false }}  />
+        <Stacks.Screen name="Deck" component={Deck}  options={({ route }) => ({ title: route.params.title })}/>
         <Stacks.Screen name="Quiz" component={Quiz} options={{ headerShown: false }} />
         </Stacks.Navigator>
       );
