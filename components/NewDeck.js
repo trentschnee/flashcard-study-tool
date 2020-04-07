@@ -3,16 +3,16 @@ import { StyleSheet, Text, View,TouchableOpacity,TextInput } from 'react-native'
 class NewDeck extends Component {
    
     state = {
-        deckInput: ''
+        deckTitleInput: ''
     }
    
-    onChangeText = (value) =>{
-      
-       this.setState({value})
+    handleChangeText = (value) =>{
+       this.setState({deckTitleInput:value})
     }
-    submitButton = ()=>{
+    handleSubmitButton = ()=>{
         const { navigation } = this.props;
-        navigation.navigate("Deck");
+        const {deckTitleInput} = this.state;
+        navigation.navigate("Deck", {title:deckTitleInput});
     }
     render() {
         const {deckTitleInput} = this.state;
@@ -21,14 +21,14 @@ class NewDeck extends Component {
               <View style={styles.countContainer}>
                 <Text>What is the title of your new deck?</Text>
                 <TextInput
-                onChangeText={this.onChangeText}
+                onChangeText={this.handleChangeText}
               value={deckTitleInput}
               placeholder={'Your card deck title'}
             />
               </View>
               <TouchableOpacity
                 style={styles.button}
-                onPress={this.onPress}
+                onPress={this.handleSubmitButton}
               >
                 <Text>Create Deck</Text>
               </TouchableOpacity>

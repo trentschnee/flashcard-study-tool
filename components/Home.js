@@ -7,14 +7,13 @@ import Deck from './Deck'
 import DeckList from './DeckList'
 const Stacks = createStackNavigator();
 class Home extends Component {
-  
+
     render() {
       return (
-        <Stacks.Navigator>
-        <Stacks.Screen name="Home" component={DeckList}  />
-        <Stacks.Screen name="Deck" component={Deck} />
-        <Stacks.Screen name="Quiz" component={Quiz} />
-        <Stacks.Screen name="addCard" component={AddCard} />
+        <Stacks.Navigator initialRouteName="Home">
+        <Stacks.Screen name="Home" component={DeckList} options={{ headerShown: false }}  />
+        <Stacks.Screen name="Deck" component={Deck} options={{ headerShown: false }}  />
+        <Stacks.Screen name="Quiz" component={Quiz} options={{ headerShown: false }} />
         </Stacks.Navigator>
       );
     }
