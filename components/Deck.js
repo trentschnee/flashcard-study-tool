@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import { StyleSheet, Text, View,TouchableOpacity,Modal } from 'react-native';
 import DeckCard from './DeckCard';
 import AddCard from './AddCard';
-
+import {deleteDeckTitle} from "../utils/api"
+import { connect } from "react-redux";
+import { deleteDeck } from "../actions";
 class Deck extends Component {
   state = {
     modalVisible: false
@@ -12,18 +14,22 @@ class Deck extends Component {
     this.setState({modalVisible:true})
   }
   handleStartQuiz = () =>{
-    console.log('start quiz')
   }
-  handleDeleteDeck = () =>{
-    console.log('delete deck')
+  handleDeleteDeck = (deck) =>{
+    const {dispatch,navigation} = this.props;
+    deleteDeckTitle(deck).then(()=>{
+      dispatch(deleteDeck(deck))
+      navigation.navigate("Home")
+    })
+
+    //navigat
   }
   handleCloseModal = () =>{
     this.setState({modalVisible:false})
   }
 
     render() {
-      const { navigation, route } = this.props;
-      const { title } = route.params;
+      const { title } = this.props;
     const {modalVisible} = this.state;
       return <View>
         <DeckCard title={title}/>
@@ -34,7 +40,7 @@ class Deck extends Component {
             
             presentationStyle="fullScreen"
           >
-            <AddCard closeModal = {this.handleCloseModal}/>
+            <AddCard title={title} closeModal = {this.handleCloseModal}/>
           </Modal>
         <TouchableOpacity
                 style={styles.button}
@@ -48,7 +54,7 @@ class Deck extends Component {
               </TouchableOpacity>
         <TouchableOpacity
                 style={styles.button}
-                onPress={this.handleDeleteDeck}
+                onPress={()=>this.handleDeleteDeck(title)}
               ><Text>Delete Deck</Text>
               </TouchableOpacity>
       </View>;
@@ -71,4 +77,10 @@ class Deck extends Component {
       padding: 10
     }
   });
-export default Deck;
+  function mapStateToProps(decks, { route }) {
+   const {title} = route.params;
+    return {
+      title
+    };
+  }
+  export default connect(mapStateToProps)(Deck)

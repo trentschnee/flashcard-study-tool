@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, View,TextInput,TouchableOpacity } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { addCard } from "../actions";
+import {saveDeckCard} from "../utils/api"
+import {connect} from 'react-redux'
 class AddCard extends Component {
     state = {
       cardQuestion:'',
@@ -8,10 +11,15 @@ class AddCard extends Component {
     }
     handleAddCardSubmit = () =>{
       // TODO: set if condition (if cardQuestion or cardAnswer is empty, give error)
-      // TODO: dispatch addNewCard
-      // TODO: save to DB
-      console.log(this.props)
+  const {dispatch,title} = this.props;
+      const {cardQuestion, cardAnswer } = this.state;
+      const card = {cardQuestion, cardAnswer}
+      saveDeckCard(title,card).then(()=>{
+        dispatch(addCard(title,card))
+      });
+
       this.setState({ cardQuestion: '',cardAnswer:'',modalVisible:false});
+   
       this.props.closeModal();
     }
     changeQuestionHandler = (value) => {
@@ -77,4 +85,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default AddCard;
+export default connect()(AddCard);

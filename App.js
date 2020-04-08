@@ -11,21 +11,31 @@ import Deck from './components/Deck';
 import DeckList from './components/DeckList';
 import NewDeck from './components/NewDeck';
 import reducer from "./reducers";
-
+import middleware from "./middleware";
 function HomeScreen({navigation,route}){
   const Tabs = createBottomTabNavigator();
   return(
-    <Tabs.Navigator initialRouteName="Home">
-    <Tabs.Screen name="Home" component={DeckList} />
-    <Tabs.Screen name="Add Deck" component={NewDeck} />
-    </Tabs.Navigator>);
+    <Tabs.Navigator
+       screenOptions={({ route }) => ({
+ 
+    })}
+tabBarOptions={{
+    activeTintColor: 'tomato',
+    inactiveTintColor: 'gray',
+    }}>
+       <Tabs.Screen name="Home" component={AllStacks} />
+    <Tabs.Screen name="Add Deck" component={NewDeck}  />
+      </Tabs.Navigator>
+  );
 }
-function AllStacks ({navigation}) {
+function AllStacks ( {navigation,route} ) {
+  navigation.setOptions({ tabBarVisible: route.state ? route.state.index > 0 ? false : true : null });
   const Stacks = createStackNavigator();
     return (
-      <Stacks.Navigator initialRouteName="HomeScreen">
-      <Stacks.Screen name="HomeScreen" component={HomeScreen} options={{title:''}} />
-      <Stacks.Screen name="Deck" component={Deck}  options={({ route }) => ({ title: route.params.title })}/>
+      
+      <Stacks.Navigator >
+          <Stacks.Screen name="Home" component={DeckList} options={{ headerShown: false }}  />
+      <Stacks.Screen name="Deck" component={Deck} options={({ route }) => ({ title: route.params.title })}/>
       <Stacks.Screen name="Quiz" component={Quiz} options={{ headerShown: false }} />
       </Stacks.Navigator>
     );
@@ -34,10 +44,10 @@ function AllStacks ({navigation}) {
 export default function App() {
   return (
   
-  <Provider store={createStore(reducer)}>
+  <Provider store={createStore(reducer,middleware)}>
       <NavigationContainer>
 
-<AllStacks/>
+<HomeScreen/>
       </NavigationContainer>
       </Provider>
   );

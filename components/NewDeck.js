@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, View,TouchableOpacity,TextInput } from 'react-native';
-
+import { addDeck } from "../actions";
+import {saveDeckTitle} from "../utils/api"
+import { connect } from "react-redux";
 class NewDeck extends Component {
    
     state = {
@@ -11,8 +13,13 @@ class NewDeck extends Component {
        this.setState({deckTitleInput:value})
     }
     handleSubmitButton = ()=>{
+      const {dispatch} = this.props;
         const { navigation } = this.props;
         const {deckTitleInput} = this.state;
+        saveDeckTitle(deckTitleInput).then(()=>{
+          dispatch(addDeck(deckTitleInput));
+        })
+        
         navigation.navigate("Deck", {title:deckTitleInput});
     }
     render() {
@@ -55,4 +62,5 @@ const styles = StyleSheet.create({
       padding: 10
     }
   });
-export default NewDeck;
+
+export default connect()(NewDeck);
