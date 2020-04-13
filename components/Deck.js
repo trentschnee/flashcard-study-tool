@@ -13,7 +13,9 @@ class Deck extends Component {
   handleAddCard = () =>{
     this.setState({modalVisible:true})
   }
-  handleStartQuiz = () =>{
+  handleStartQuiz = (deck) =>{
+    const {navigation,title} = this.props;
+    navigation.navigate("Quiz", {title});
   }
   handleDeleteDeck = (deck) =>{
     const {dispatch,navigation} = this.props;
@@ -49,7 +51,7 @@ class Deck extends Component {
               </TouchableOpacity>
         <TouchableOpacity
                 style={styles.button}
-                onPress={this.handleStartQuiz}
+                onPress={()=>this.handleStartQuiz(title)}
               ><Text>Start Quiz</Text>
               </TouchableOpacity>
         <TouchableOpacity
