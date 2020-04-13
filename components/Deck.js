@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, View,TouchableOpacity,Modal } from 'react-native';
+import { StyleSheet, Text, View,TouchableOpacity,Modal  } from 'react-native';
 import DeckCard from './DeckCard';
 import AddCard from './AddCard';
 import {deleteDeckTitle} from "../utils/api"
@@ -63,22 +63,14 @@ class Deck extends Component {
     }
   }
   
+  
+
   const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: "center",
-      paddingHorizontal: 10
-    },
-    button: {
-      alignItems: "center",
-      backgroundColor: "#DDDDDD",
-      padding: 10
-    },
-    countContainer: {
-      alignItems: "center",
-      padding: 10
+    container:{
+      display:flex
     }
-  });
+  })
+  
   function mapStateToProps(decks, { route }) {
    const {title} = route.params;
     return {
