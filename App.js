@@ -13,6 +13,7 @@ import NewDeck from './components/NewDeck';
 import reducer from "./reducers";
 import middleware from "./middleware";
 import AddCard from './components/AddCard';
+import {setLocalNotification} from './utils/helpers'
 function HomeScreen({navigation,route}){
   const Tabs = createBottomTabNavigator();
   return(
@@ -43,7 +44,12 @@ function AllStacks ( {navigation,route} ) {
     );
 }
 
-export default function App() {
+export default class App extends React.Component {
+  // Set local notification for the first time
+  componentDidMount(){
+setLocalNotification()
+  }
+  render(){
   return (
   
   <Provider store={createStore(reducer,middleware)}>
@@ -57,12 +63,4 @@ export default function App() {
       </Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+}
