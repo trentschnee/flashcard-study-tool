@@ -1,6 +1,7 @@
 import React from 'react'
 import { View, Text, AsyncStorage } from 'react-native'
-import { Notifications, Permissions } from 'expo'
+import { Notifications } from 'expo'
+import * as Permissions from 'expo-permissions'
 const FLASHCARDS_NOTIFICATION_DB = 'flashcards:notification'
 function createLocalNotification() {
     // Return an object that says don't forget to study
@@ -12,8 +13,9 @@ function createLocalNotification() {
 
 export function setLocalNotification() {
     AsyncStorage.getItem(FLASHCARDS_NOTIFICATION_DB).then(JSON.parse).then((data) => {
+      
         if (data === null) {
-            Permissions.AsyncStorage(Permissions.NOTIFICATIONS).then(({ status }) => {
+            Permissions.getAsync(Permissions.NOTIFICATIONS).then(({ status }) => {
                 if (status === 'granted') {
                     Notifications.cancelAllScheduledNotificationsAsync()
                     // Create a new data
