@@ -14,6 +14,7 @@ import reducer from "./reducers";
 import middleware from "./middleware";
 import AddCard from './components/AddCard';
 import {setLocalNotification} from './utils/helpers'
+import {blue} from "./utils/colors"
 function HomeScreen({navigation,route}){
   const Tabs = createBottomTabNavigator();
   return(
@@ -22,7 +23,7 @@ function HomeScreen({navigation,route}){
  
     })}
 tabBarOptions={{
-    activeTintColor: 'tomato',
+    activeTintColor: blue,
     inactiveTintColor: 'gray',
     }}>
        <Tabs.Screen name="Home" component={AllStacks} />

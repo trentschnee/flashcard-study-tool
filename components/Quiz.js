@@ -53,8 +53,8 @@ class Quiz extends Component {
     const number = qNumber + 1;
     if (numberOfQuestions === 0) {
       return (<View style={styles.container}>
-        <View style={styles.card}>
-          <Text>Sorry, you cannot take a quiz because there are no cards in the deck.</Text>
+        <View style={[styles.card,styles.textPanel]}>
+          <Text>Sorry, you cannot take a quiz because there are no cards in the deck. Please go back, and press "Add Card" to add a new card.</Text>
         </View>
       </View>)
     }
@@ -81,7 +81,7 @@ class Quiz extends Component {
       <View style={styles.card}>
 
         {
-          !showQ ? <View><Text style={styles.mainQuestion} >Question: "{deck.questions[qNumber].cardQuestion}"</Text><TouchableOpacity onPress={this.showA} >
+          !showQ ? <View ><Text style={styles.mainQuestion} >Question: "{deck.questions[qNumber].cardQuestion}"</Text><TouchableOpacity onPress={this.showA} >
             <Text style={{ color: orange}} >Show Answer</Text>
           </TouchableOpacity></View> : <View><Text style={styles.mainQuestion} >Answer: "{deck.questions[qNumber].cardAnswer}"</Text><TouchableOpacity onPress={this.showA} >
             <Text style={{ color: green}} >Show Question</Text>
@@ -110,10 +110,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center"
   },
+  textPanel:{
+padding:16,
+  },
   card: {
     flex: 1,
-    justifyContent: "space-evenly",
     alignItems: "center",
+    justifyContent: "space-evenly",
     backgroundColor: blue,
     alignSelf: "stretch",
     shadowColor: 'rgba(0,0,0,0.34)',

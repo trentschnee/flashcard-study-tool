@@ -21,6 +21,11 @@ class DeckList extends Component {
   }
   render() {
     const { deckTitles } = this.props
+    if (deckTitles.length === 0){
+      return(<View style={styles.container}>
+<Text>No decks are available! Please add a deck by going to "Add Deck" in the navigation menu below. </Text>
+      </View>)
+    }
     return <View style={styles.container}>
       <FlatList 
         data={deckTitles}
@@ -40,11 +45,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignSelf: "stretch",
+    justifyContent:"center",
     padding:30
   },
   card:{
     flex:1,
-    justifyContent: "center",
     alignItems: "center",
     margin:10,
     padding:10,
