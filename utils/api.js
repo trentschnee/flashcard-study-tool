@@ -32,7 +32,6 @@ export function deleteDeckTitle(title){
     })
 }
 export function saveDeckCard(title, question) {
-  console.log(title,'<-title',question,'<-question')
     return AsyncStorage.getItem(FLASHCARDS_FLASHCARD_DB).then(results => {
       const data = JSON.parse(results);
       Object.keys(data).map(dTitle => {

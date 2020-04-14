@@ -11,13 +11,13 @@ function DeckCard(props) {
 }
 
 const styles = StyleSheet.create({
-    
+    text:{
+alignItems:"center"
+    },
       title: {
         fontSize: 24,
     },
-    subTitle: {
-        fontSize: 16,
-    },
+   
 });
 function mapStateToProps(decks, { title }) {
     // {title} is the param passed from parent component. We just need to match that within the decks list

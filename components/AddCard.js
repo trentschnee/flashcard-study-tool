@@ -44,16 +44,16 @@ class AddCard extends Component {
       const {cardQuestion,cardAnswer} = this.state;
       return (
         <View style={styles.container}>
-          <View >
+          <View style={styles.card} >
             <Text>What is your question?</Text>
-            <TextInput
+            <TextInput style={styles.input}
             onChangeText={this.changeQuestionHandler}
           value={cardQuestion}
           placeholder={'Your Question'}
         />
           
             <Text>What is your answer??</Text>
-            <TextInput
+            <TextInput style={styles.input}
             onChangeText={this.changeAnswerHandler}
           value={cardAnswer}
           placeholder={'Your Answer'}
@@ -79,21 +79,36 @@ const styles = StyleSheet.create({
   submitBtnText:{
     color:white,
   },
+  card:{
+    flex:1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor:blue,
+    alignSelf:"stretch",
+    shadowColor: 'rgba(0,0,0,0.34)',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    }
+  },
+  input: {
+    borderWidth: 1,
+    flexDirection: "row",
+    padding: 10,
+    width: 300,
+    textAlign: "center",
+    borderRadius: 3,
+    marginVertical: 10
+  },
   addBtn:{
+    
+    alignItems: "center",
     backgroundColor:green,
     padding:16,
     margin:10,
     borderRadius:3
   },
-  button: {
-    alignItems: "center",
-    backgroundColor: "#DDDDDD",
-    padding: 10
-  },
-  countContainer: {
-    alignItems: "center",
-    padding: 10
-  }
+
 });
 
 export default connect()(AddCard);

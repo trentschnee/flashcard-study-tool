@@ -59,7 +59,6 @@ const styles = StyleSheet.create({
  
 });
 function mapStateToProps(decks) {
-  console.log(JSON.stringify(decks), "<-thisisit")
   const deckTitles = Object.keys(decks);
   return {
     deckTitles
