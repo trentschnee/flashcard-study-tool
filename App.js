@@ -12,6 +12,7 @@ import DeckList from './components/DeckList';
 import NewDeck from './components/NewDeck';
 import reducer from "./reducers";
 import middleware from "./middleware";
+import AddCard from './components/AddCard';
 function HomeScreen({navigation,route}){
   const Tabs = createBottomTabNavigator();
   return(
@@ -36,7 +37,8 @@ function AllStacks ( {navigation,route} ) {
       <Stacks.Navigator >
           <Stacks.Screen name="Home" component={DeckList} options={{ headerShown: false }}  />
       <Stacks.Screen name="Deck" component={Deck} options={({ route }) => ({ title: route.params.title })}/>
-      <Stacks.Screen name="Quiz" component={Quiz} options={{ headerShown: false }} />
+      <Stacks.Screen name="addCard" component={AddCard} options={({ route }) => ({ title: route.params.title })}/>
+      <Stacks.Screen name="Quiz" component={Quiz}  />
       </Stacks.Navigator>
     );
 }
@@ -45,10 +47,13 @@ export default function App() {
   return (
   
   <Provider store={createStore(reducer,middleware)}>
+    
       <NavigationContainer>
-
+      <View style={{flex:1}}>
 <HomeScreen/>
+</View>
       </NavigationContainer>
+     
       </Provider>
   );
 }

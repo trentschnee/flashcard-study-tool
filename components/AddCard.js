@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { addCard } from "../actions";
 import {saveDeckCard} from "../utils/api"
 import {connect} from 'react-redux'
+import {white,green,blue} from "../utils/colors"
 class AddCard extends Component {
     state = {
       cardQuestion:'',
@@ -11,17 +12,18 @@ class AddCard extends Component {
     }
     handleAddCardSubmit = () =>{
       // TODO: set if condition (if cardQuestion or cardAnswer is empty, give error)
-  const {dispatch,title} = this.props;
+  const {dispatch,navigation,route} = this.props;
+  const { title } = route.params;
       const {cardQuestion, cardAnswer } = this.state;
       const card = {cardQuestion, cardAnswer}
       saveDeckCard(title,card).then(()=>{
         dispatch(addCard(title,card))
+       
       });
-
-      this.setState({ cardQuestion: '',cardAnswer:'',modalVisible:false});
+      this.setState({ cardQuestion: '',cardAnswer:''});
+      navigation.goBack()
    
-      this.props.closeModal();
-    }
+     }
     changeQuestionHandler = (value) => {
       const {cardQuestion, cardAnswer } = this.state;
       // This will get the current state and merge it in with either the question
@@ -42,28 +44,27 @@ class AddCard extends Component {
       const {cardQuestion,cardAnswer} = this.state;
       return (
         <View style={styles.container}>
-          <View style={styles.countContainer}>
+          <View >
             <Text>What is your question?</Text>
             <TextInput
             onChangeText={this.changeQuestionHandler}
           value={cardQuestion}
           placeholder={'Your Question'}
         />
-          </View>
-          <View style={styles.countContainer}>
+          
             <Text>What is your answer??</Text>
             <TextInput
             onChangeText={this.changeAnswerHandler}
           value={cardAnswer}
           placeholder={'Your Answer'}
         />
-          </View>
+        
           <TouchableOpacity
-            style={styles.button}
-            onPress={this.handleAddCardSubmit}
-          >
-            <Text>Create Deck</Text>
-          </TouchableOpacity>
+          style={styles.addBtn}
+          onPress={this.handleAddCardSubmit}
+        ><Text style={{color:white}}>Add Card</Text>
+        </TouchableOpacity>
+        </View>
         </View>
       );
       }
@@ -72,7 +73,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    paddingHorizontal: 10
+    alignItems:"center"
+  },
+  
+  submitBtnText:{
+    color:white,
+  },
+  addBtn:{
+    backgroundColor:green,
+    padding:16,
+    margin:10,
+    borderRadius:3
   },
   button: {
     alignItems: "center",

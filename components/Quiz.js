@@ -1,49 +1,46 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, View,TextButton } from 'react-native';
+import { StyleSheet, Text, View,TextButton,TouchableOpacity } from 'react-native';
 import { connect } from "react-redux";
+import {blue,red,green,orange,white} from "../utils/colors"
 import DeckCard from './DeckCard';
 class Quiz extends Component {
   state = {
-    qIndex: 0,
-    correctQ: 0,
-    incorrectQ:0,
-    showAnswer: false,
+    qNumber: 0,
+    showQ: false
   }
     render() {
-      const { route, numberOfQuestions, questions, navigation } = this.props;
+      const { route, numberOfQuestions, questions, navigation,deck } = this.props;
       const { title } = route.params;
-      const { qIndex, correctQ } = this.state;
-      return (  <View >
-        <DeckCard title={title} />
-        <View>
-          <View >
-            <Text >
-              {qIndex + 1}/{numberOfQuestions}
-            </Text>
-        <Text >
+      const {showQ,qNumber} = this.state;
+      const number = qNumber + 1;
+      return (  <View style={styles.container} >
+          <View style={styles.card}>
+          <Text style={styles.numberOfQuestions} >{number}/{numberOfQuestions}</Text>
+          {
+!showQ ? <Text style={styles.mainQuestion} >{deck.questions[qNumber].cardQuestion}</Text>: <Text style={styles.mainQuestion} >{deck.questions[qNumber].cardAnswer}</Text>
+          }
+            
+            
           {/* {showAnswer ? card.answer : card.question} */}
-        </Text>
+     
+        <TouchableOpacity >
+			<Text style={styles.saText} >Show Answer</Text>
+		</TouchableOpacity>
+
         {/* Tooggling ShowAnswer button implementation */}
-        <TextButton
-          onPress={flip}
-        >
-          {showAnswer ? "Show Question" : "Show Answer"}
-        </TextButton>
+      
 
         <TouchableOpacity
           style={styles.button}
-          onPress={() => mark("correct")}
         >
           <Text >Correct</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => mark("incorrect")}
         >
           <Text>Incorrect</Text>
         </TouchableOpacity>
           </View>
-        </View>
       </View>);
     }
   }
@@ -51,23 +48,27 @@ class Quiz extends Component {
     container: {
       flex: 1,
       justifyContent: "center",
-      paddingHorizontal: 10
+      alignItems:"center"
     },
-    button: {
+    card:{
+      flex:1,
+      justifyContent: "center",
       alignItems: "center",
-      backgroundColor: "#DDDDDD",
-      padding: 10
+      backgroundColor:blue,
+      alignSelf:"stretch",
+      shadowColor: 'rgba(0,0,0,0.34)',
+      shadowOffset: {
+        width: 0,
+        height: 3,
+      }
     },
-    countContainer: {
-      alignItems: "center",
-      padding: 10
-    }
   });
   function mapStateToProps(decks, { route }) {
     const {title} = route.params;
     const deck = decks[title];
-    console.log(deck, '<-THis is ssit')
+    // get current deck
     const numberOfQuestions = deck.questions.length;
+    // get decks number of questions
     return {
       deck,
       numberOfQuestions,
