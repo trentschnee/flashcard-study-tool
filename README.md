@@ -14,12 +14,11 @@ $ npm yarn install
 
 ## Running
 
-Run the development server with live reload by running the following command:
-
+Run the application with expo by running the following command
 ```
 $ yarn start
 ```
-If for some reason a browser doesn't open after you run the command, http://localhost:3000 is the link your development server.
+Once you have ran the command, scan the QR code the app gives you with the expo app and you will be able to view the application.
 
 ## Create React Native App
 
